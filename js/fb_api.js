@@ -10,10 +10,11 @@ function statusChangeCallback(response) {
             $('#UserName')[0].innerHTML = response.name;
             $("ul li:nth-child(3)")[0].innerHTML = "<li><a href=\"#\">"+response.name+"</a></li>";
             NAME = response.name;
-            //$.post("http://140.113.195.211:9090/play",{name : response.name});
+            getPost();
         });
     }
 }
+
 function getPost()
 {
     FB.api('/me/posts',function (response) {
