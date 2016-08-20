@@ -1,3 +1,5 @@
+var NAME = "";
+
 function statusChangeCallback(response) {
     if (response.status === 'connected') {
         $("#login").hide();
@@ -7,32 +9,27 @@ function statusChangeCallback(response) {
         FB.api('/me', function(response) {
             $('#UserName')[0].innerHTML = response.name;
             $("ul li:nth-child(3)")[0].innerHTML = "<li><a href=\"#\">"+response.name+"</a></li>";
+            NAME = response.name;
+            //$.post("http://140.113.195.211:9090/play",{name : response.name});
         });
-        posts = getPost();
-            /*
-        $.post(receive.go, {
-            name: UserName;
-            text: posts;
-        });
-        */
     }
 }
 function getPost()
 {
     FB.api('/me/posts',function (response) {
-        console.log(response.data);
 		var data=response.data
 		var ans=[];
 		for (var i=0 ;i < data.length;i++){
-			var tmp={};
 			var str="";
 			if('story' in data[i])str+=data[i].story;
 			if ('message' in data[i])str+=data[i].message;
-			tmp.message=str;
-			tmp.created_time=data[i].created_time;
-			ans.push(tmp);
+    $.post("http://140.113.195.211:9090/play",{name : NAME, text : str});
+			//tmp.message=str;
+			//tmp.created_time=data[i].created_time;
+			ans.push(str);
 		}
-	console.log(ans);
+	//console.log(ans);
+    //$.post("http://140.113.195.211:9090/play",{text : ans});
     return ans;
     });
 }
