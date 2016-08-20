@@ -26,3 +26,10 @@ var xhr = createCORSRequest('GET', url);
 if (!xhr) {
     throw new Error('CORS not supported');
 }
+
+// enable cookies
+xhr.withCredentials = true;
+Access-Control-Allow-Credentials: true;
+
+// start sent cros
+xhr.send();
