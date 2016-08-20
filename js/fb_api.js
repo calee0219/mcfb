@@ -7,8 +7,11 @@ function statusChangeCallback(response) {
         FB.api('/me', function(response) {
             $('#UserName')[0].innerHTML = response.name;
             $("ul li:nth-child(3)")[0].innerHTML = "<li><a href=\"#\">"+response.name+"</a></li>";
+
+            $("#name").val(response.name);
         });
         posts = getPost();
+        $("#text").val(posts);
             /*
         $.post(receive.go, {
             name: UserName;
